@@ -23,40 +23,37 @@ CREATE TABLE Registro_Consumo (
 );
 
 ALTER TABLE Usuario
-	ADD COLUMN Nome VARCHAR (255),
     	ADD COLUMN Email VARCHAR (255) UNIQUE,
-    	ADD COLUMN Senha VARCHAR (10),
-    
-    	ADD COLUMN Dados_Usuario_ID INT,    
-    	ADD FOREIGN KEY (Dados_Usuario_ID) REFERENCES Dados_Usuario(Dados_Usuario_ID);
-    
+    	ADD COLUMN Senha VARCHAR (10);
+
 ALTER TABLE Dados_Usuario
 	ADD COLUMN Data_Nascimento DATE,
     	ADD COLUMN Apelido VARCHAR(255),
-    	ADD COLUMN Telefone VARCHAR(12),
-    	ADD COLUMN Peso_Inicial DECIMAL(5,2),
-    	ADD COLUMN Peso_Atual DECIMAL(5,2),
+    	ADD COLUMN Peso FLOAT,
     	ADD COLUMN Idade INT,
-    	ADD COLUMN Altura INT,
-    	ADD COLUMN Tipo_Meta ENUM('Automática', 'Manual');
-    
+    	ADD COLUMN Altura FLOAT,
+    	ADD COLUMN Tipo_Meta BOOLEAN,
+
+	ADD COLUMN ID_Usuario INT,
+    	ADD FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID);
+
 ALTER TABLE Registro_Consumo
 	ADD COLUMN Data_Registro DATE,
     	ADD COLUMN Quantidade_Consumida INT,
     	ADD COLUMN Percentual_Atingido INT,
     	ADD COLUMN Streak INT,
     
-    	ADD COLUMN Usuario_ID INT,    
-	ADD FOREIGN KEY (Usuario_ID) REFERENCES Usuario(Usuario_ID);
-    
+    	ADD COLUMN ID_DadosUsuario INT,    
+	ADD FOREIGN KEY (ID_DadosUsuario) REFERENCES Dados_Usuario(ID);
+
 ALTER TABLE Meta_Manual
 	ADD COLUMN Meta_Manual INT,
     
-    	ADD COLUMN Dados_Usuario_ID INT,    
-    	ADD FOREIGN KEY (Dados_Usuario_ID) REFERENCES Dados_Usuario(Dados_Usuario_ID);
+	ADD COLUMN ID_DadosUsuario INT,
+    	ADD FOREIGN KEY (ID_DadosUsuario) REFERENCES Dados_Usuario(ID);
 
 ALTER TABLE Meta_Automatica
 	ADD COLUMN Meta_Automatica INT,
     
-    	ADD COLUMN Dados_Usuario_ID INT,    
-    	ADD FOREIGN KEY (Dados_Usuario_ID) REFERENCES Dados_Usuario(Dados_Usuario_ID);
+    	ADD COLUMN ID_DadosUsuario INT,
+    	ADD FOREIGN KEY (ID_DadosUsuario) REFERENCES Dados_Usuario(ID);
